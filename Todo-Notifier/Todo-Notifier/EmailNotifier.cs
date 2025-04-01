@@ -7,7 +7,7 @@ public class EmailNotifier
 {
     public List<Todo> GetTodos()
     {
-        const string connectionString = "Data Source=192.168.0.198,1433;Initial Catalog=Todo;Persist Security Info=False;User ID=Alex;Password=KelsiRose41512#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;";
+        const string connectionString = "Data Source=192.168.0.198,1433;Initial Catalog=Todo;Persist Security Info=False;User ID=Alex;Password=MyKelsi41512#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;";
         const string queryString = "SELECT Title, IsCompleted FROM Todos";
 
         List<Todo> todos = [];
@@ -67,7 +67,6 @@ public class EmailNotifier
                         <thead>
                             <tr>
                                 <th>Title</th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
