@@ -1,44 +1,9 @@
-﻿using Microsoft.Data.SqlClient;
-using MimeKit;
+﻿using MimeKit;
 
 namespace Todo_Notifier;
 
 public class EmailNotifier
 {
-    public List<Todo> GetTodos()
-    {
-        const string connectionString = "Data Source=192.168.0.198,1433;Initial Catalog=Todo;Persist Security Info=False;User ID=Alex;Password=MyKelsi41512#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;";
-        const string queryString = "SELECT Title, IsCompleted FROM Todos";
-
-        List<Todo> todos = [];
-
-        using SqlConnection connection = new SqlConnection(connectionString);
-        SqlCommand command = new SqlCommand(queryString, connection);
-        connection.Open();
-        SqlDataReader reader = command.ExecuteReader();
-        try
-        {
-            while (reader.Read())
-            {
-                todos.Add(new Todo
-                {
-                    Title = reader.GetString(0),
-                    IsCompleted = reader.GetBoolean(1),
-                });
-            }
-        }
-        catch
-        {
-            Console.WriteLine("Error reading from database");
-        }
-        finally
-        {
-            reader.Close();
-        }
-
-        return todos;
-    }
-
     public void SendEmail(List<Todo> todos)
     {
         string body = """
