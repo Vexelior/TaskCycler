@@ -1,0 +1,16 @@
+{
+  "Tasks": [
+    {
+      "Title": "Workout.",
+      "IsCompleted": false
+    },
+    {
+      "Title": "Feed animals.",
+      "IsCompleted": false
+    },
+    {
+      "Title": "Read for 30 - 60 minutes.",
+      "IsCompleted": false
+    }
+  ]
+}

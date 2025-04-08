@@ -1,4 +1,6 @@
-﻿using Todo_Notifier;
+﻿using System.Text.Json;
+using Org.BouncyCastle.Math.EC;
+using Todo_Notifier;
 
 internal class Program
 {
@@ -32,27 +34,16 @@ internal class Program
             }
         }
 
-        List<Todo> dailyTodos = new List<Todo>
+        string json = File.ReadAllText("config.json");
+        var config = JsonDocument.Parse(json);
+        var tasks = config.RootElement.GetProperty("Tasks").EnumerateArray();
+
+        List<Todo> dailyTodos = tasks.Select(task => new Todo
         {
-            new Todo
-            {
-                Title = "Workout.",
-                IsCompleted = false,
-                Created = DateTime.Now
-            },
-            new Todo
-            {
-                Title = "Feed animals.",
-                IsCompleted = false,
-                Created = DateTime.Now
-            },
-            new Todo
-            {
-                Title = "Read for 30 - 60 minutes.",
-                IsCompleted = false,
-                Created = DateTime.Now
-            }
-        };
+            Title = task.GetProperty("Title").GetString(), 
+            IsCompleted = task.GetProperty("IsCompleted").GetBoolean(), 
+            Created = DateTime.Now
+        }).ToList();
 
         if (DateTime.Now.DayOfWeek == DayOfWeek.Tuesday)
         {
