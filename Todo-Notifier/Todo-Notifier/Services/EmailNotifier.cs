@@ -1,6 +1,7 @@
 ﻿using MimeKit;
+using Todo_Notifier.Models;
 
-namespace Todo_Notifier;
+namespace Todo_Notifier.Services;
 
 public class EmailNotifier
 {

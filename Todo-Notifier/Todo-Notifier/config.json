@@ -1,4 +1,5 @@
 {
+  "ConnectionString": "Data Source=192.168.0.198,1433;Initial Catalog=Todo;Persist Security Info=False;User ID=Alex;Password=Poopmasterk45#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;",
   "Tasks": [
     {
       "Title": "Workout.",

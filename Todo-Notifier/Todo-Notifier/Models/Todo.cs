@@ -1,4 +1,4 @@
-﻿namespace Todo_Notifier;
+﻿namespace Todo_Notifier.Models;
 
 public class Todo
 {

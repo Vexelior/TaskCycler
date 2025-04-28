@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
-using Org.BouncyCastle.Math.EC;
-using Todo_Notifier;
+using Todo_Notifier.Factories;
+using Todo_Notifier.Models;
+using Todo_Notifier.Services;
 
 internal class Program
 {
@@ -9,7 +10,9 @@ internal class Program
         Console.WriteLine("Starting Todo Notifier...");
 
         EmailNotifier emailNotifier = new EmailNotifier();
-        List<Todo> todos = TodoFactory.GetTodos();
+        TodoFactory todoFactory = new TodoFactory();
+
+        List<Todo> todos = todoFactory.GetTodos();
         List<Todo> inCompleteTodos = todos.FindAll(todo => !todo.IsCompleted);
 
         if (inCompleteTodos.Count > 0)
@@ -24,7 +27,7 @@ internal class Program
             List<Todo> removedTodos = new List<Todo>();
             foreach (var todo in completedTodos)
             {
-                TodoFactory.DeleteTodo(todo.Title);
+                todoFactory.DeleteTodo(todo.Title);
                 removedTodos.Add(todo);
             }
 
@@ -59,7 +62,7 @@ internal class Program
         {
             foreach (var dailyTodo in dailyTodos.Where(dailyTodo => !todos.Exists(todo => todo.Title == dailyTodo.Title)))
             {
-                TodoFactory.AddTodo(dailyTodo);
+                todoFactory.AddTodo(dailyTodo);
             }
         }
 

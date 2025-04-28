@@ -1,23 +1,30 @@
 ﻿using Microsoft.Data.SqlClient;
+using Todo_Notifier.Models;
+using Todo_Notifier.Processors;
 
-namespace Todo_Notifier;
+namespace Todo_Notifier.Factories;
 
 public class TodoFactory
 {
-    private const string connectionString = "Data Source=192.168.0.198,1433;Initial Catalog=Todo;Persist Security Info=False;User ID=Alex;Password=MyKelsi41512#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;";
+    private readonly string _connectionString;
 
-    public static List<Todo> GetTodos()
+    public TodoFactory()
     {
-        List<Todo> todos = [];
+        _connectionString = SettingsProcessor.GetConnectionString() ?? throw new InvalidOperationException("Connection string is not set.");
+    }
+
+    public List<Todo> GetTodos()
+    {
+        List<Todo> todos = new();
 
         const string queryString = "SELECT Title, IsCompleted, Completed, Created FROM Todos";
 
-        using SqlConnection connection = new SqlConnection(connectionString);
+        using SqlConnection connection = new SqlConnection(_connectionString);
         SqlCommand command = new SqlCommand(queryString, connection);
         connection.Open();
-        
+
         SqlDataReader reader = command.ExecuteReader();
-        
+
         try
         {
             while (reader.Read())
@@ -43,10 +50,10 @@ public class TodoFactory
         return todos;
     }
 
-    public static void AddTodo(Todo todo)
+    public void AddTodo(Todo todo)
     {
         const string queryString = "INSERT INTO Todos (Title, IsCompleted, Completed, Created) VALUES (@Title, @IsCompleted, @Completed, @Created)";
-        using SqlConnection connection = new SqlConnection(connectionString);
+        using SqlConnection connection = new SqlConnection(_connectionString);
         SqlCommand command = new SqlCommand(queryString, connection);
         command.Parameters.AddWithValue("@Title", todo.Title);
         command.Parameters.AddWithValue("@IsCompleted", todo.IsCompleted);
@@ -56,10 +63,10 @@ public class TodoFactory
         command.ExecuteNonQuery();
     }
 
-    public static void DeleteTodo(string title)
+    public void DeleteTodo(string title)
     {
         const string queryString = "DELETE FROM Todos WHERE Title = @Title";
-        using SqlConnection connection = new SqlConnection(connectionString);
+        using SqlConnection connection = new SqlConnection(_connectionString);
         SqlCommand command = new SqlCommand(queryString, connection);
         command.Parameters.AddWithValue("@Title", title);
         connection.Open();
