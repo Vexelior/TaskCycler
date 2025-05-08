@@ -52,7 +52,23 @@ internal class Program
         {
             dailyTodos.Add(new Todo
             {
-                Title = "Take out trash.",
+                Title = "Put trash can on curb for pickup",
+                IsCompleted = false,
+                Created = DateTime.Now
+            });
+        }
+
+        if (DateTime.Now.DayOfWeek == DayOfWeek.Wednesday)
+        {
+            dailyTodos.Add(new Todo
+            {
+                Title = "Post on LinkedIn",
+                IsCompleted = false,
+                Created = DateTime.Now
+            });
+            dailyTodos.Add(new Todo
+            {
+                Title = "Clean out Fridge",
                 IsCompleted = false,
                 Created = DateTime.Now
             });

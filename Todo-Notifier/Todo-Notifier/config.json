@@ -2,15 +2,11 @@
   "ConnectionString": "Data Source=192.168.0.198,1433;Initial Catalog=Todo;Persist Security Info=False;User ID=Alex;Password=Poopmasterk45#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;",
   "Tasks": [
     {
-      "Title": "Workout.",
+      "Title": "Workout",
       "IsCompleted": false
     },
     {
-      "Title": "Feed animals.",
-      "IsCompleted": false
-    },
-    {
-      "Title": "Read for 30 - 60 minutes.",
+      "Title": "Feed animals",
       "IsCompleted": false
     }
   ]
