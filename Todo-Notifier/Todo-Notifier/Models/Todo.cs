@@ -6,4 +6,5 @@ public class Todo
     public bool IsCompleted { get; set; }
     public DateTime? Completed { get; set; }
     public DateTime? Created { get; set; }
+    public string DayOfTheWeek { get; set; }
 }

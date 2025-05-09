@@ -3,11 +3,28 @@
   "Tasks": [
     {
       "Title": "Workout",
-      "IsCompleted": false
+      "IsCompleted": false,
+      "DayOfTheWeek": "Daily"
     },
     {
       "Title": "Feed animals",
-      "IsCompleted": false
+      "IsCompleted": false,
+      "DayOfTheWeek": "Daily"
+    },
+    {
+      "Title": "Put trash can on curb for pickup",
+      "IsCompleted": false,
+      "DayOfTheWeek": "Tuesday"
+    },
+    {
+      "Title": "Post on LinkedIn",
+      "IsCompleted": false,
+      "DayOfTheWeek": "Wednesday"
+    },
+    {
+      "Title": "Clean out fridge",
+      "IsCompleted": false,
+      "DayOfTheWeek": "Wednesday"
     }
   ]
 }

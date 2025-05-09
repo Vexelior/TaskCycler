@@ -41,44 +41,35 @@ internal class Program
         var config = JsonDocument.Parse(json);
         var tasks = config.RootElement.GetProperty("Tasks").EnumerateArray();
 
-        List<Todo> dailyTodos = tasks.Select(task => new Todo
+        foreach (var task in tasks)
         {
-            Title = task.GetProperty("Title").GetString(), 
-            IsCompleted = task.GetProperty("IsCompleted").GetBoolean(), 
-            Created = DateTime.Now
-        }).ToList();
+            string dayOfTheWeek = task.GetProperty("DayOfTheWeek").GetString();
+            if (dayOfTheWeek == DateTime.Now.DayOfWeek.ToString())
+            {
+                Todo todo = new Todo
+                {
+                    Title = task.GetProperty("Title").GetString(),
+                    IsCompleted = false,
+                    Created = DateTime.Now,
+                };
+                todoFactory.AddTodo(todo);
+            }
 
-        if (DateTime.Now.DayOfWeek == DayOfWeek.Tuesday)
-        {
-            dailyTodos.Add(new Todo
+            if (dayOfTheWeek == "Daily")
             {
-                Title = "Put trash can on curb for pickup",
-                IsCompleted = false,
-                Created = DateTime.Now
-            });
-        }
-
-        if (DateTime.Now.DayOfWeek == DayOfWeek.Wednesday)
-        {
-            dailyTodos.Add(new Todo
-            {
-                Title = "Post on LinkedIn",
-                IsCompleted = false,
-                Created = DateTime.Now
-            });
-            dailyTodos.Add(new Todo
-            {
-                Title = "Clean out Fridge",
-                IsCompleted = false,
-                Created = DateTime.Now
-            });
-        }
-
-        if (dailyTodos.Count > 0)
-        {
-            foreach (var dailyTodo in dailyTodos.Where(dailyTodo => !todos.Exists(todo => todo.Title == dailyTodo.Title)))
-            {
-                todoFactory.AddTodo(dailyTodo);
+                bool taskExists = todos.Any(t => t.Title == task.GetProperty("Title").GetString());
+                if (taskExists)
+                {
+                    Console.WriteLine($"Task '{task.GetProperty("Title").GetString()}' already exists. Skipping addition.");
+                    continue;
+                }
+                Todo todo = new Todo
+                {
+                    Title = task.GetProperty("Title").GetString(),
+                    IsCompleted = false,
+                    Created = DateTime.Now,
+                };
+                todoFactory.AddTodo(todo);
             }
         }
 
