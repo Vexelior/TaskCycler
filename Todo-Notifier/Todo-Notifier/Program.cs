@@ -49,8 +49,11 @@ internal class Program
                 Todo todo = new Todo
                 {
                     Title = task.GetProperty("Title").GetString(),
+                    Category = task.GetProperty("Category").GetString(),
+                    Description = task.GetProperty("Description").GetString(),
                     IsCompleted = false,
                     Created = DateTime.Now,
+                    DueDate = DateTime.Now.AddDays(1)
                 };
                 todoFactory.AddTodo(todo);
             }
@@ -66,8 +69,11 @@ internal class Program
                 Todo todo = new Todo
                 {
                     Title = task.GetProperty("Title").GetString(),
+                    Category = task.GetProperty("Category").GetString(),
+                    Description = task.GetProperty("Description").GetString(),
                     IsCompleted = false,
                     Created = DateTime.Now,
+                    DueDate = DateTime.Now.AddDays(1)
                 };
                 todoFactory.AddTodo(todo);
             }

@@ -3,28 +3,33 @@
   "Tasks": [
     {
       "Title": "Workout",
-      "IsCompleted": false,
-      "DayOfTheWeek": "Daily"
+      "DayOfTheWeek": "Daily",
+      "Category": "Personal",
+      "Description": "Workout for 30 minutes."
     },
     {
       "Title": "Feed animals",
-      "IsCompleted": false,
-      "DayOfTheWeek": "Daily"
+      "DayOfTheWeek": "Daily",
+      "Category": "Personal",
+      "Description": "Feed the animals in the evening."
     },
     {
       "Title": "Put trash can on curb for pickup",
-      "IsCompleted": false,
-      "DayOfTheWeek": "Tuesday"
+      "DayOfTheWeek": "Tuesday",
+      "Category": "Personal",
+      "Description": "Empty all other trash cans and set can on curb for Wednesday pickup."
     },
     {
       "Title": "Post on LinkedIn",
-      "IsCompleted": false,
-      "DayOfTheWeek": "Wednesday"
+      "DayOfTheWeek": "Wednesday",
+      "Category": "Personal",
+      "Description": "Post on LinkedIn about the latest project or technology."
     },
     {
       "Title": "Clean out fridge",
-      "IsCompleted": false,
-      "DayOfTheWeek": "Wednesday"
+      "DayOfTheWeek": "Wednesday",
+      "Category": "Personal",
+      "Description": "Clean out the fridge and throw away expired food."
     }
   ]
 }

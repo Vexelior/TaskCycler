@@ -52,20 +52,22 @@ public class TodoFactory
 
     public void AddTodo(Todo todo)
     {
-        const string queryString = "INSERT INTO Todos (Title, IsCompleted, Completed, Created) VALUES (@Title, @IsCompleted, @Completed, @Created)";
+        const string queryString = "INSERT INTO Todos (Title, Category, Description, IsCompleted, Created, DueDate) VALUES (@Title, @Category, @Description, @IsCompleted, @Created, @DueDate)";
         using SqlConnection connection = new SqlConnection(_connectionString);
         SqlCommand command = new SqlCommand(queryString, connection);
         command.Parameters.AddWithValue("@Title", todo.Title);
-        command.Parameters.AddWithValue("@IsCompleted", todo.IsCompleted);
-        command.Parameters.AddWithValue("@Completed", (object)todo.Completed ?? DBNull.Value);
-        command.Parameters.AddWithValue("@Created", (object)todo.Created ?? DBNull.Value);
+        command.Parameters.AddWithValue("@Category", todo.Category);
+        command.Parameters.AddWithValue("@Description", todo.Description);
+        command.Parameters.AddWithValue("@IsCompleted", false);
+        command.Parameters.AddWithValue("@Created", DateTime.Today.Date);
+        command.Parameters.AddWithValue("@DueDate", todo.DueDate ?? (object)DBNull.Value);
         connection.Open();
         command.ExecuteNonQuery();
     }
 
     public void DeleteTodo(string title)
     {
-        const string queryString = "DELETE FROM Todos WHERE Title = @Title";
+        const string queryString = "DELETE FROM Todos WHERE Title = @Title AND IsCompleted = 1";
         using SqlConnection connection = new SqlConnection(_connectionString);
         SqlCommand command = new SqlCommand(queryString, connection);
         command.Parameters.AddWithValue("@Title", title);
