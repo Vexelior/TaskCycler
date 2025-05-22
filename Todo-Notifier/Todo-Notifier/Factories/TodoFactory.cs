@@ -52,25 +52,14 @@ public class TodoFactory
 
     public void AddTodo(Todo todo)
     {
-        const string queryString = "INSERT INTO Todos (Title, Category, Description, IsCompleted, Created, DueDate) VALUES (@Title, @Category, @Description, @IsCompleted, @Created, @DueDate)";
+        const string queryString = "INSERT INTO Todos (Title, Description, IsCompleted, Created, Due) VALUES (@Title, @Description, @IsCompleted, @Created, @Due)";
         using SqlConnection connection = new SqlConnection(_connectionString);
         SqlCommand command = new SqlCommand(queryString, connection);
         command.Parameters.AddWithValue("@Title", todo.Title);
-        command.Parameters.AddWithValue("@Category", todo.Category);
         command.Parameters.AddWithValue("@Description", todo.Description);
         command.Parameters.AddWithValue("@IsCompleted", false);
         command.Parameters.AddWithValue("@Created", DateTime.Today.Date);
-        command.Parameters.AddWithValue("@DueDate", todo.DueDate ?? (object)DBNull.Value);
-        connection.Open();
-        command.ExecuteNonQuery();
-    }
-
-    public void DeleteTodo(string title)
-    {
-        const string queryString = "DELETE FROM Todos WHERE Title = @Title AND IsCompleted = 1";
-        using SqlConnection connection = new SqlConnection(_connectionString);
-        SqlCommand command = new SqlCommand(queryString, connection);
-        command.Parameters.AddWithValue("@Title", title);
+        command.Parameters.AddWithValue("@Due", todo.DueDate ?? (object)DBNull.Value);
         connection.Open();
         command.ExecuteNonQuery();
     }

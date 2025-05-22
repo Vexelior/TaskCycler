@@ -3,7 +3,9 @@ using Todo_Notifier.Factories;
 using Todo_Notifier.Models;
 using Todo_Notifier.Services;
 
-internal class Program
+namespace Todo_Notifier;
+
+public static class Program
 {
     private static void Main()
     {
@@ -20,65 +22,62 @@ internal class Program
             emailNotifier.SendEmail(inCompleteTodos);
         }
 
-        List<Todo> completedTodos = todos.FindAll(todo => todo.IsCompleted);
-        if (completedTodos.Count > 0)
-        {
-            Console.WriteLine("Removing completed todos from database...");
-            List<Todo> removedTodos = new List<Todo>();
-            foreach (var todo in completedTodos)
-            {
-                todoFactory.DeleteTodo(todo.Title);
-                removedTodos.Add(todo);
-            }
-
-            foreach (var removedTodo in removedTodos)
-            {
-                todos.Remove(removedTodo);
-            }
-        }
-
         string json = File.ReadAllText("config.json");
-        var config = JsonDocument.Parse(json);
-        var tasks = config.RootElement.GetProperty("Tasks").EnumerateArray();
+        JsonDocument config = JsonDocument.Parse(json);
+        JsonElement.ArrayEnumerator tasks = config.RootElement.GetProperty("Tasks").EnumerateArray();
 
-        foreach (var task in tasks)
+        if (tasks.Any())
         {
-            string dayOfTheWeek = task.GetProperty("DayOfTheWeek").GetString();
-            if (dayOfTheWeek == DateTime.Now.DayOfWeek.ToString())
+            foreach (JsonElement task in tasks)
             {
-                Todo todo = new Todo
+                string dayOfTheWeek = task.GetProperty("DayOfTheWeek").GetString();
+                if (dayOfTheWeek == DateTime.Now.DayOfWeek.ToString())
                 {
-                    Title = task.GetProperty("Title").GetString(),
-                    Category = task.GetProperty("Category").GetString(),
-                    Description = task.GetProperty("Description").GetString(),
-                    IsCompleted = false,
-                    Created = DateTime.Now,
-                    DueDate = DateTime.Now.AddDays(1)
-                };
-                todoFactory.AddTodo(todo);
-            }
+                    bool taskExists =
+                        todos.Any(t => t.Title == task.GetProperty("Title").GetString() && !t.IsCompleted);
+                    if (taskExists)
+                    {
+                        Console.WriteLine($"Task '{task.GetProperty("Title").GetString()}' already exists. Skipping addition.");
+                        continue;
+                    }
 
-            if (dayOfTheWeek == "Daily")
-            {
-                bool taskExists = todos.Any(t => t.Title == task.GetProperty("Title").GetString());
-                if (taskExists)
-                {
-                    Console.WriteLine($"Task '{task.GetProperty("Title").GetString()}' already exists. Skipping addition.");
-                    continue;
+                    Todo todo = new Todo
+                    {
+                        Title = task.GetProperty("Title").GetString(),
+                        Description = task.GetProperty("Description").GetString(),
+                        IsCompleted = false,
+                        Created = DateTime.Now,
+                        DueDate = DateTime.Now.AddDays(1)
+                    };
+                    todoFactory.AddTodo(todo);
                 }
-                Todo todo = new Todo
-                {
-                    Title = task.GetProperty("Title").GetString(),
-                    Category = task.GetProperty("Category").GetString(),
-                    Description = task.GetProperty("Description").GetString(),
-                    IsCompleted = false,
-                    Created = DateTime.Now,
-                    DueDate = DateTime.Now.AddDays(1)
-                };
-                todoFactory.AddTodo(todo);
-            }
-        }
 
-        Console.WriteLine("Todo Notifier completed successfully.");
+                if (dayOfTheWeek == "Daily")
+                {
+                    bool taskExists = todos.Any(t => t.Title == task.GetProperty("Title").GetString() && !t.IsCompleted);
+                    if (taskExists)
+                    {
+                        Console.WriteLine($"Task '{task.GetProperty("Title").GetString()}' already exists. Skipping addition.");
+                        continue;
+                    }
+
+                    Todo todo = new Todo
+                    {
+                        Title = task.GetProperty("Title").GetString(),
+                        Description = task.GetProperty("Description").GetString(),
+                        IsCompleted = false,
+                        Created = DateTime.Now,
+                        DueDate = DateTime.Now.AddDays(1)
+                    };
+                    todoFactory.AddTodo(todo);
+                }
+            }
+
+            Console.WriteLine("Todo Notifier completed successfully.");
+        }
+        else
+        {
+            Console.WriteLine("No tasks found in the configuration file.");
+        }
     }
 }
