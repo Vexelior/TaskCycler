@@ -52,9 +52,10 @@ public class TodoFactory
 
     public void AddTodo(Todo todo)
     {
-        const string queryString = "INSERT INTO Todos (Title, Description, IsCompleted, Created, Due) VALUES (@Title, @Description, @IsCompleted, @Created, @Due)";
+        const string queryString = "INSERT INTO Todos (Id, Title, Description, IsCompleted, Created, Due) VALUES (@Id, @Title, @Description, @IsCompleted, @Created, @Due)";
         using SqlConnection connection = new SqlConnection(_connectionString);
         SqlCommand command = new SqlCommand(queryString, connection);
+        command.Parameters.AddWithValue("@Id", Guid.NewGuid());
         command.Parameters.AddWithValue("@Title", todo.Title);
         command.Parameters.AddWithValue("@Description", todo.Description);
         command.Parameters.AddWithValue("@IsCompleted", false);

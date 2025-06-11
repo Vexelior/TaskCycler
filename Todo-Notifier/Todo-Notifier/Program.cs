@@ -1,7 +1,6 @@
 ﻿using System.Text.Json;
 using Todo_Notifier.Factories;
 using Todo_Notifier.Models;
-using Todo_Notifier.Services;
 
 namespace Todo_Notifier;
 
@@ -11,16 +10,9 @@ public static class Program
     {
         Console.WriteLine("Starting Todo Notifier...");
 
-        EmailNotifier emailNotifier = new EmailNotifier();
         TodoFactory todoFactory = new TodoFactory();
 
         List<Todo> todos = todoFactory.GetTodos();
-        List<Todo> inCompleteTodos = todos.FindAll(todo => !todo.IsCompleted);
-
-        if (inCompleteTodos.Count > 0)
-        {
-            emailNotifier.SendEmail(inCompleteTodos);
-        }
 
         string json = File.ReadAllText("config.json");
         JsonDocument config = JsonDocument.Parse(json);
@@ -46,8 +38,8 @@ public static class Program
                         Title = task.GetProperty("Title").GetString(),
                         Description = task.GetProperty("Description").GetString(),
                         IsCompleted = false,
-                        Created = DateTime.Now,
-                        DueDate = DateTime.Now.AddDays(1)
+                        Created = DateTime.Now.Date,
+                        DueDate = DateTime.Now.Date
                     };
                     todoFactory.AddTodo(todo);
                 }
@@ -66,8 +58,8 @@ public static class Program
                         Title = task.GetProperty("Title").GetString(),
                         Description = task.GetProperty("Description").GetString(),
                         IsCompleted = false,
-                        Created = DateTime.Now,
-                        DueDate = DateTime.Now.AddDays(1)
+                        Created = DateTime.Now.Date,
+                        DueDate = DateTime.Now.Date
                     };
                     todoFactory.AddTodo(todo);
                 }
