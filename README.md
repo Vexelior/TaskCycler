@@ -1,4 +1,4 @@
-# Todo-Notifier
+# TaskCycler
 
 Todo-Notifier is a C# application that automatically populates your todo list database with specific, recurring todos for the current day.
 
