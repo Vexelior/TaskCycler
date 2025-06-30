@@ -72,6 +72,12 @@
       "TimeOfDay": "Afternoon"
     },
     {
+      "Title": "Cat boxes",
+      "DayOfTheWeek": "Daily",
+      "Description": "",
+      "TimeOfDay": "Afternoon"
+    },
+    {
       "Title": "Put away clean laundry",
       "DayOfTheWeek": "Daily",
       "Description": "",
