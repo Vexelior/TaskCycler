@@ -4,32 +4,118 @@
     {
       "Title": "Workout",
       "DayOfTheWeek": "Daily",
-      "Category": "Personal",
-      "Description": "Workout for 30 minutes."
+      "Description": ""
     },
     {
       "Title": "Feed animals",
       "DayOfTheWeek": "Daily",
-      "Category": "Personal",
-      "Description": "Feed the animals in the evening."
+      "Description": "Feed dogs, cats, reptiles (snakes if needed)"
+    },
+    {
+      "Title": "Make the bed",
+      "DayOfTheWeek": "Daily",
+      "Description": "",
+      "TimeOfDay": "Morning"
+    },
+    {
+      "Title": "Load/unload dishwasher",
+      "DayOfTheWeek": "Daily",
+      "Description": "",
+      "TimeOfDay": "Morning"
+    },
+    {
+      "Title": "Wipe down kitchen counters & sink",
+      "DayOfTheWeek": "Daily",
+      "Description": "",
+      "TimeOfDay": "Morning"
+    },
+    {
+      "Title": "Quick bathroom sink & toilet wipe down",
+      "DayOfTheWeek": "Daily",
+      "Description": "",
+      "TimeOfDay": "Morning"
+    },
+    {
+      "Title": "Take out trash",
+      "DayOfTheWeek": "Daily",
+      "Description": "",
+      "TimeOfDay": "Morning"
+    },
+    {
+      "Title": "Start a load of laundry",
+      "DayOfTheWeek": "Daily",
+      "Description": "",
+      "TimeOfDay": "Morning"
+    },
+    {
+      "Title": "Switch laundry to dryer",
+      "DayOfTheWeek": "Daily",
+      "Description": "",
+      "TimeOfDay": "Afternoon"
+    },
+    {
+      "Title": "Put away clean dishes",
+      "DayOfTheWeek": "Daily",
+      "Description": "",
+      "TimeOfDay": "Afternoon"
+    },
+    {
+      "Title": "Wipe high-use surfaces (table, counters, doorknobs)",
+      "DayOfTheWeek": "Daily",
+      "Description": "",
+      "TimeOfDay": "Afternoon"
+    },
+    {
+      "Title": "Check in with Kelsi",
+      "DayOfTheWeek": "Daily",
+      "Description": "Does she need water, snacks, or anything else?",
+      "TimeOfDay": "Afternoon"
+    },
+    {
+      "Title": "Put away clean laundry",
+      "DayOfTheWeek": "Daily",
+      "Description": "",
+      "TimeOfDay": "Evening"
+    },
+    {
+      "Title": "Quick 10-15 minute tidy up",
+      "DayOfTheWeek": "Daily",
+      "Description": "",
+      "TimeOfDay": "Evening"
+    },
+    {
+      "Title": "Sweep/vacuum high-traffic areas",
+      "DayOfTheWeek": "Daily",
+      "Description": "",
+      "TimeOfDay": "Evening"
+    },
+    {
+      "Title": "Make and/or clean up dinner",
+      "DayOfTheWeek": "Daily",
+      "Description": "",
+      "TimeOfDay": "Evening"
+    },
+    {
+      "Title": "Wipe kitchen counters and table",
+      "DayOfTheWeek": "Daily",
+      "Description": "",
+      "TimeOfDay": "Evening"
+    },
+    {
+      "Title": "Run dishwasher",
+      "DayOfTheWeek": "Daily",
+      "Description": "",
+      "TimeOfDay": "Evening"
     },
     {
       "Title": "Put trash can on curb for pickup",
       "DayOfTheWeek": "Tuesday",
-      "Category": "Personal",
       "Description": "Empty all other trash cans and set can on curb for Wednesday pickup."
     },
     {
       "Title": "Post on LinkedIn",
       "DayOfTheWeek": "Wednesday",
-      "Category": "Personal",
-      "Description": "Post on LinkedIn about the latest project or technology."
-    },
-    {
-      "Title": "Clean out fridge",
-      "DayOfTheWeek": "Wednesday",
-      "Category": "Personal",
-      "Description": "Clean out the fridge and throw away expired food."
+      "Description": ""
     }
   ]
 }

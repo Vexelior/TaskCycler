@@ -17,7 +17,7 @@ public class TodoFactory
     {
         List<Todo> todos = new();
 
-        const string queryString = "SELECT Title, IsCompleted, Completed, Created FROM Todos";
+        const string queryString = "SELECT Title, IsCompleted, Completed, Created, TimeOfDay FROM Todos";
 
         using SqlConnection connection = new SqlConnection(_connectionString);
         SqlCommand command = new SqlCommand(queryString, connection);
@@ -34,7 +34,8 @@ public class TodoFactory
                     Title = reader.GetString(0),
                     IsCompleted = reader.GetBoolean(1),
                     Completed = reader.IsDBNull(2) ? null : reader.GetDateTime(2),
-                    Created = reader.IsDBNull(3) ? null : reader.GetDateTime(3)
+                    Created = reader.IsDBNull(3) ? null : reader.GetDateTime(3),
+                    TimeOfDay = reader.IsDBNull(4) ? null : reader.GetString(4)
                 });
             }
         }
@@ -52,7 +53,7 @@ public class TodoFactory
 
     public void AddTodo(Todo todo)
     {
-        const string queryString = "INSERT INTO Todos (Id, Title, Description, IsCompleted, Created, Due) VALUES (@Id, @Title, @Description, @IsCompleted, @Created, @Due)";
+        const string queryString = "INSERT INTO Todos (Id, Title, Description, IsCompleted, Created, Due, TimeOfDay) VALUES (@Id, @Title, @Description, @IsCompleted, @Created, @Due, @TimeOfDay)";
         using SqlConnection connection = new SqlConnection(_connectionString);
         SqlCommand command = new SqlCommand(queryString, connection);
         command.Parameters.AddWithValue("@Id", Guid.NewGuid());
@@ -61,6 +62,7 @@ public class TodoFactory
         command.Parameters.AddWithValue("@IsCompleted", false);
         command.Parameters.AddWithValue("@Created", DateTime.Today.Date);
         command.Parameters.AddWithValue("@Due", todo.DueDate ?? (object)DBNull.Value);
+        command.Parameters.AddWithValue("@TimeOfDay", todo.TimeOfDay ?? (object)DBNull.Value);
         connection.Open();
         command.ExecuteNonQuery();
     }

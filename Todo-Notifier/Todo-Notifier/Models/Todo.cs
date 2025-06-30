@@ -9,4 +9,5 @@ public class Todo
     public DateTime? Created { get; set; }
     public string DayOfTheWeek { get; set; }
     public DateTime? DueDate { get; set; }
+    public string TimeOfDay { get; set; }
 }
