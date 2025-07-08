@@ -75,6 +75,15 @@ public static class Program
             }
 
             Console.WriteLine("Todo Notifier completed successfully.");
+
+            Console.WriteLine("Attempting to delete completed tasks...");
+            var batchDeleteIndicator = todoFactory.DeleteTodos();
+            if (batchDeleteIndicator)
+            {
+                Console.WriteLine("Completed tasks deleted successfully.");
+            }
+
+            Console.WriteLine("All tasks processed successfully.");
         }
         else
         {

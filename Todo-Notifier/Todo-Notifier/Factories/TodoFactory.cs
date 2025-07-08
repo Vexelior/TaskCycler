@@ -66,4 +66,22 @@ public class TodoFactory
         connection.Open();
         command.ExecuteNonQuery();
     }
+
+    public bool DeleteTodos()
+    {
+        const string queryString = "DELETE FROM Todos WHERE IsCompleted = 1";
+        using SqlConnection connection = new SqlConnection(_connectionString);
+        SqlCommand command = new SqlCommand(queryString, connection);
+        connection.Open();
+        try
+        {
+            command.ExecuteNonQuery();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error deleting completed todos: {ex.Message}");
+            return false;
+        }
+    }
 }
