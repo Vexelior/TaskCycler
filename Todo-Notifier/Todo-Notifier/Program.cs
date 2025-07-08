@@ -26,15 +26,14 @@ public static class Program
                 if (dayOfTheWeek == DateTime.Now.DayOfWeek.ToString())
                 {
                     bool taskExists = todos.Any(t => t.Title == task.GetProperty("Title").GetString() && !t.IsCompleted);
+
                     if (taskExists)
                     {
                         Console.WriteLine($"Task '{task.GetProperty("Title").GetString()}' already exists. Skipping addition.");
                         continue;
                     }
 
-                    string timeOfDay = task.TryGetProperty("TimeOfDay", out JsonElement timeOfDayElement) 
-                        ? timeOfDayElement.GetString() 
-                        : string.Empty;
+                    string timeOfDay = task.TryGetProperty("TimeOfDay", out JsonElement timeOfDayElement) ? timeOfDayElement.GetString() : string.Empty;
 
                     Todo todo = new Todo
                     {
@@ -50,21 +49,23 @@ public static class Program
 
                 if (dayOfTheWeek == "Daily")
                 {
-                    bool taskExists = todos.Any(t => t.Title == task.GetProperty("Title").GetString() && !t.IsCompleted);
+                    string title = task.TryGetProperty("Title", out JsonElement titleElement) ? titleElement.GetString() : string.Empty;
+                    string timeOfDay = task.TryGetProperty("TimeOfDay", out JsonElement timeOfDayElement) ? timeOfDayElement.GetString() : string.Empty;
+                    
+                    bool taskExists = !string.IsNullOrEmpty(timeOfDay) ? todos.Any(t => t.Title == title && !t.IsCompleted && t.TimeOfDay == timeOfDay) : todos.Any(t => t.Title == title && !t.IsCompleted);
+
                     if (taskExists)
                     {
-                        Console.WriteLine($"Task '{task.GetProperty("Title").GetString()}' already exists. Skipping addition.");
+                        Console.WriteLine($"Task '{title}' already exists. Skipping addition.");
                         continue;
                     }
 
-                    string timeOfDay = task.TryGetProperty("TimeOfDay", out JsonElement timeOfDayElement) 
-                        ? timeOfDayElement.GetString() 
-                        : string.Empty;
+                    string description = task.TryGetProperty("Description", out JsonElement descElement) ? descElement.GetString() : string.Empty;
 
                     Todo todo = new Todo
                     {
-                        Title = task.GetProperty("Title").GetString(),
-                        Description = task.GetProperty("Description").GetString(),
+                        Title = title,
+                        Description = description,
                         IsCompleted = false,
                         Created = DateTime.Now.Date,
                         DueDate = DateTime.Now.Date,
@@ -72,9 +73,8 @@ public static class Program
                     };
                     todoFactory.AddTodo(todo);
                 }
-            }
 
-            Console.WriteLine("Todo Notifier completed successfully.");
+            }
 
             Console.WriteLine("Attempting to delete completed tasks...");
             var batchDeleteIndicator = todoFactory.DeleteTodos();

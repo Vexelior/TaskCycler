@@ -9,7 +9,14 @@
     {
       "Title": "Feed animals",
       "DayOfTheWeek": "Daily",
-      "Description": "Feed dogs, cats, reptiles (snakes if needed)"
+      "Description": "Feed dogs, cats, reptiles (snakes if needed)",
+      "TimeOfDay": "Morning"
+    },
+    {
+      "Title": "Feed animals",
+      "DayOfTheWeek": "Daily",
+      "Description": "Feed dogs, cats, reptiles (snakes if needed)",
+      "TimeOfDay": "Evening"
     },
     {
       "Title": "Make the bed",
