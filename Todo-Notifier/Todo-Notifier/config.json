@@ -19,12 +19,6 @@
       "TimeOfDay": "Evening"
     },
     {
-      "Title": "Make the bed",
-      "DayOfTheWeek": "Daily",
-      "Description": "",
-      "TimeOfDay": "Morning"
-    },
-    {
       "Title": "Load/unload dishwasher",
       "DayOfTheWeek": "Daily",
       "Description": "",
@@ -67,12 +61,6 @@
       "TimeOfDay": "Afternoon"
     },
     {
-      "Title": "Wipe high-use surfaces (table, counters, doorknobs)",
-      "DayOfTheWeek": "Daily",
-      "Description": "",
-      "TimeOfDay": "Afternoon"
-    },
-    {
       "Title": "Check in with Kelsi",
       "DayOfTheWeek": "Daily",
       "Description": "Does she need water, snacks, or anything else?",
@@ -91,13 +79,13 @@
       "TimeOfDay": "Evening"
     },
     {
-      "Title": "Quick 10-15 minute tidy up",
+      "Title": "Quick tidy up",
       "DayOfTheWeek": "Daily",
       "Description": "",
       "TimeOfDay": "Evening"
     },
     {
-      "Title": "Sweep/vacuum high-traffic areas",
+      "Title": "Sweep/vacuum",
       "DayOfTheWeek": "Daily",
       "Description": "",
       "TimeOfDay": "Evening"
@@ -105,13 +93,7 @@
     {
       "Title": "Make and/or clean up dinner",
       "DayOfTheWeek": "Daily",
-      "Description": "",
-      "TimeOfDay": "Evening"
-    },
-    {
-      "Title": "Wipe kitchen counters and table",
-      "DayOfTheWeek": "Daily",
-      "Description": "",
+      "Description": "Wipe down counters & stove.",
       "TimeOfDay": "Evening"
     },
     {
